@@ -1,0 +1,172 @@
+import pandas as pd
+import numpy as np
+import optuna
+from optuna.samplers import TPESampler
+import argparse
+from pathlib import Path
+import json
+from data_prep import load_and_split_data  # Importing the split function
+
+class FindParams:
+    """
+    A class to load a dataset and optimize the parameters prox_epsilon, prox_weight,
+    and gaze_weight using Optuna to minimize the weighted mean squared error.
+    """
+
+    def __init__(self, df, batch_size=1000):
+        """
+        Initializes the FindParams class.
+
+        Args:
+            df (pd.DataFrame): The DataFrame containing the dataset.
+            batch_size (int): Number of samples per batch for processing.
+        """
+        self.dataframe = df
+        self.batch_size = batch_size
+
+    def _error_function(self, trial):
+        """
+        Calculates the weighted mean squared error (MSE) for given parameters
+        suggested by Optuna.
+
+        Args:
+            trial (optuna.trial.Trial): A trial object which suggests values for parameters.
+
+        Returns:
+            float: The weighted mean squared error.
+        """
+        # Suggest parameter values within their respective ranges
+        prox_epsilon = trial.suggest_uniform('prox_epsilon', self.dataframe['prox_epsilon'].min(), self.dataframe['prox_epsilon'].max())
+        prox_weight = trial.suggest_uniform('prox_weight', 0, 1)
+        gaze_weight = trial.suggest_uniform('gaze_weight', 0, 1)
+
+        # Initialize cumulative error and weights
+        total_weighted_mse = 0
+        total_weights = 0
+
+        # Process data in batches
+        for start in range(0, len(self.dataframe), self.batch_size):
+            end = min(start + self.batch_size, len(self.dataframe))
+            batch = self.dataframe.iloc[start:end]
+
+            # Calculate distances for each row in the batch
+            distances = np.abs(batch['prox_epsilon'] - prox_epsilon) + \
+                        np.abs(batch['prox_weight'] - prox_weight) + \
+                        np.abs(batch['gaze_weight'] - gaze_weight)
+
+            # Avoid division by zero by adding a small value (1e-6)
+            weights = 1 / (distances + 1e-6)
+
+            # Compute the weighted mean squared error for the batch
+            weighted_mse = np.sum(weights * ((batch['eng_1'] - batch['grace_eng']) ** 2)) / np.sum(weights)
+
+            # Accumulate results
+            total_weighted_mse += weighted_mse * len(batch)
+            total_weights += len(batch)
+
+        # Average the weighted MSE across all batches
+        final_weighted_mse = total_weighted_mse / total_weights if total_weights > 0 else np.inf
+        
+        return final_weighted_mse
+
+    def optimize_parameters(self, n_trials=3000, patience=1000, min_delta=1e-5, seed=42, results_file='results.json'):
+        """
+        Optimize prox_epsilon, prox_weight, and gaze_weight to minimize the weighted MSE
+        with early stopping based on convergence and a fixed seed for reproducibility.
+
+        Args:
+            n_trials (int): Maximum number of trials for optimization.
+            patience (int): Number of trials to wait before stopping if no improvement is found.
+            min_delta (float): Minimum difference in the MSE to be considered an improvement.
+            seed (int): Random seed for reproducibility.
+            results_file (str): Path to save the results.
+
+        Returns:
+            dict: The best parameter values found.
+        """
+        # Callback to stop if no improvement
+        def early_stopping_callback(study, trial):
+            if len(study.trials) > patience:
+                best_trials = study.trials[-patience:]
+                if all(np.abs(trial.value - best_trials[0].value) < min_delta for trial in best_trials):
+                    study.stop()
+
+        # Create the study with a fixed seed for reproducibility
+        sampler = TPESampler(seed=seed)
+        storage = "sqlite:///optuna_study.db"
+    
+        # Create the study with the defined storage
+        study = optuna.create_study(direction='minimize', storage=storage, load_if_exists=True, sampler=sampler)
+        print("Starting optimization...")
+
+        study.optimize(self._error_function, n_trials=n_trials, callbacks=[early_stopping_callback])
+
+        best_params = study.best_params
+        best_mse = study.best_value
+
+        # Output the results
+        print("Optimal parameters found:")
+        print(f"prox_epsilon: {best_params['prox_epsilon']}")
+        print(f"prox_weight: {best_params['prox_weight']}")
+        print(f"gaze_weight: {best_params['gaze_weight']}")
+        print(f"Overall weighted MSE at optimal parameters: {best_mse}")
+
+        # Save best parameters and all trial details
+        self._save_results(best_params, best_mse, study.trials, results_file)
+
+        return best_params
+
+    def _save_results(self, best_params, best_mse, trials, results_file):
+        """
+        Saves the optimization results (best parameters, MSE, and all trial data) to a file.
+
+        Args:
+            best_params (dict): The best parameters found.
+            best_mse (float): The corresponding MSE.
+            trials (list of optuna.trial.FrozenTrial): The list of all trials.
+            results_file (str): Path to the results file.
+        """
+        results_data = {
+            'best_params': best_params,
+            'best_mse': best_mse,
+            'trials': [
+                {
+                    'trial_number': trial.number,
+                    'params': trial.params,
+                    'value': trial.value
+                }
+                for trial in trials
+            ]
+        }
+
+        # Save to a JSON file
+        with open(results_file, 'w') as f:
+            json.dump(results_data, f, indent=4)
+        print(f"Results saved to {results_file}")
+
+def main():
+    """
+    Main function to parse command line arguments and run the parameter optimization.
+    """
+    parser = argparse.ArgumentParser(description='Optimize parameters to minimize weighted MSE.')
+    parser.add_argument('--file_path', type=str, help='Path to the CSV file', default="dataset.csv")
+    parser.add_argument('--results_file', type=str, help='Path to save the results JSON file', default="results5.json")
+    parser.add_argument('--batch_size', type=int, help='Batch size for processing data', default=1000)
+
+    args = parser.parse_args()
+    file_path = Path(args.file_path)
+    results_file = args.results_file
+    batch_size = args.batch_size
+    
+    # Load and split the dataset
+    train_df, _ = load_and_split_data(file_path)  # Load only the training part
+    # Initialize and run parameter optimization
+    fp = FindParams(train_df, batch_size=batch_size)
+
+    try:
+        optimal_params = fp.optimize_parameters(results_file=results_file)
+    except ValueError as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
