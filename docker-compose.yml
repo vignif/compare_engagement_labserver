@@ -1,0 +1,138 @@
+name: eng
+services:
+  roscore:
+    container_name: roscore
+    build:
+      context: ./core
+    networks:
+      ros_network:
+        ipv4_address: 172.21.0.2
+  
+  play_rosbag:
+    container_name: play_rosbag
+    build:
+      context: ./play
+    depends_on:
+      - roscore
+    environment:
+      - ROS_MASTER_URI=http://172.21.0.2:11311 # IP Address of ROS Master
+      - ROS_HOSTNAME=172.21.0.3 # Own IP Address
+    volumes:
+      - /home/dsomma/hdd/bags:/app/bags
+    command: ["tail", "-f", "/dev/null"]
+    networks:
+      ros_network:
+        ipv4_address: 172.21.0.3
+
+  # eng_0: #AnshulSood11
+  #   container_name: eng_0
+  #   build:
+  #     context: ./eng_0
+  #   depends_on:
+  #     - roscore
+  #   environment:
+  #     - ROS_MASTER_URI=http://172.21.0.2:11311 # IP Address of ROS Master
+  #     - ROS_HOSTNAME=172.21.0.4 # Own IP Address
+  #   volumes:
+  #     - ./play/data:/app/data
+  #   command: ["tail", "-f", "/dev/null"]
+  #   networks:
+  #     ros_network:
+  #       ipv4_address: 172.21.0.4
+
+  eng_1: # delduchetto
+    container_name: eng_1
+    build:
+      context: ./eng_1
+    depends_on:
+      - play_rosbag
+    environment:
+      - ROS_MASTER_URI=http://172.21.0.2:11311 # IP Address of ROS Master
+      - ROS_HOSTNAME=172.21.0.8 # Own IP Address
+    command: ["tail", "-f", "/dev/null"]
+    networks:
+      ros_network:
+        ipv4_address: 172.21.0.8
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0', '1']
+            capabilities: [gpu]
+    tty: true
+    stdin_open: true
+
+  eng_4: # tamlin
+    container_name: tamlin
+    build:
+      context: ./eng_4
+    depends_on:
+      - play_rosbag
+    environment:
+      - ROS_MASTER_URI=http://172.21.0.2:11311 # IP Address of ROS Master
+      - ROS_HOSTNAME=172.21.0.5 # Own IP Address
+    command: ["tail", "-f", "/dev/null"]
+    networks:
+      ros_network:
+        ipv4_address: 172.21.0.5
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0', '1']
+            capabilities: [gpu]
+    tty: true
+    stdin_open: true
+
+  eng_5: # grace
+    container_name: grace
+    build:
+      context: ./eng_5
+    depends_on:
+      - play_rosbag
+    environment:
+      - ROS_MASTER_URI=http://172.21.0.2:11311 # IP Address of ROS Master
+      - ROS_HOSTNAME=172.21.0.6 # Own IP Address
+    command: ["tail", "-f", "/dev/null"]
+    networks:
+      ros_network:
+        ipv4_address: 172.21.0.6
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['1']
+            capabilities: [gpu]  
+    tty: true
+    stdin_open: true
+
+  compare: # compare 
+    container_name: compare 
+    build:
+      context: ./compare
+    depends_on:
+      - play_rosbag
+      - eng_5
+      - eng_4
+      - eng_1
+    environment:
+      - ROS_MASTER_URI=http://172.21.0.2:11311 # IP Address of ROS Master
+      - ROS_HOSTNAME=172.21.0.7 # Own IP Address
+    command: ["tail", "-f", "/dev/null"]
+    volumes:
+      - ./csv:/catkin_ws/data/
+    networks:
+      ros_network:
+        ipv4_address: 172.21.0.7    
+    tty: true
+    stdin_open: true
+
+networks:
+  ros_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/24
