@@ -1,0 +1,12 @@
+# Ignore the .git directory
+.git
+
+# Ignore node_modules
+bags
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+
