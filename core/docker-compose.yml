@@ -1,0 +1,10 @@
+version: '3'
+services:
+  roscore:
+    build: .
+    networks:
+      - ros_network
+
+networks:
+  ros_network:
+    driver: bridge
