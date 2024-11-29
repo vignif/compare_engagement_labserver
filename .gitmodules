@@ -1,0 +1,18 @@
+[submodule "eng_0"]
+	path = eng_0
+	url = ./eng_0/
+[submodule "eng_1"]
+	path = eng_1
+	url = ./eng_1/
+[submodule "eng_2"]
+	path = eng_2
+	url = ./eng_2/
+[submodule "eng_3"]
+	path = eng_3
+	url = ./eng_3/
+[submodule "eng_4"]
+	path = eng_4
+	url = ./eng_4/
+[submodule "grace_common_msgs"]
+	path = grace_common_msgs
+	url = ./grace_common_msgs/
