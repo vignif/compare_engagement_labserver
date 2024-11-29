@@ -1,0 +1,11 @@
+name: learn
+services:
+  learn:
+    container_name: learn
+    build:
+      context: .
+    environment:
+      - ROS_MASTER_URI=http://172.21.0.2:11311 # IP Address of ROS Master
+      - ROS_HOSTNAME=172.21.0.3 # Own IP Address
+    volumes:
+      - /home/dsomma/hdd/bags:/app/bags
