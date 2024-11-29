@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2017-05-03T16:00:51+01:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+    <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///home/alim/Annotations/user95_2017-02-24_frontbottom_audiovideo.avi" MIME_TYPE="video/*" RELATIVE_MEDIA_URL="./user95_2017-02-24_frontbottom_audiovideo.avi"/>
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///home/alim/Annotations/user95_2017-02-24_mono.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./user95_2017-02-24_mono.wav"/>
+        <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:765e075e-e1e0-452f-8204-12952028650a</PROPERTY>
+        <PROPERTY NAME="lastUsedAnnotationId">9</PROPERTY>
+    </HEADER>
+    <TIME_ORDER>
+        <TIME_SLOT TIME_SLOT_ID="ts1" TIME_VALUE="60"/>
+        <TIME_SLOT TIME_SLOT_ID="ts2" TIME_VALUE="279272"/>
+        <TIME_SLOT TIME_SLOT_ID="ts3" TIME_VALUE="279272"/>
+        <TIME_SLOT TIME_SLOT_ID="ts4" TIME_VALUE="279272"/>
+        <TIME_SLOT TIME_SLOT_ID="ts5" TIME_VALUE="279272"/>
+        <TIME_SLOT TIME_SLOT_ID="ts6" TIME_VALUE="283363"/>
+        <TIME_SLOT TIME_SLOT_ID="ts7" TIME_VALUE="283363"/>
+        <TIME_SLOT TIME_SLOT_ID="ts8" TIME_VALUE="283363"/>
+        <TIME_SLOT TIME_SLOT_ID="ts9" TIME_VALUE="283363"/>
+        <TIME_SLOT TIME_SLOT_ID="ts10" TIME_VALUE="554134"/>
+        <TIME_SLOT TIME_SLOT_ID="ts11" TIME_VALUE="554134"/>
+        <TIME_SLOT TIME_SLOT_ID="ts12" TIME_VALUE="554134"/>
+        <TIME_SLOT TIME_SLOT_ID="ts13" TIME_VALUE="554134"/>
+        <TIME_SLOT TIME_SLOT_ID="ts14" TIME_VALUE="556998"/>
+        <TIME_SLOT TIME_SLOT_ID="ts15" TIME_VALUE="556998"/>
+        <TIME_SLOT TIME_SLOT_ID="ts16" TIME_VALUE="556998"/>
+        <TIME_SLOT TIME_SLOT_ID="ts17" TIME_VALUE="556998"/>
+        <TIME_SLOT TIME_SLOT_ID="ts18" TIME_VALUE="727317"/>
+    </TIME_ORDER>
+    <TIER DEFAULT_LOCALE="fr" LINGUISTIC_TYPE_REF="Interact" TIER_ID="Interaction">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a1" CVE_REF="cveid2" TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts18">
+                <ANNOTATION_VALUE>Mono</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <TIER DEFAULT_LOCALE="fr" LINGUISTIC_TYPE_REF="EngBD" TIER_ID="Engagement">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a2" CVE_REF="cveid0" TIME_SLOT_REF1="ts2" TIME_SLOT_REF2="ts6">
+                <ANNOTATION_VALUE>SED</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a3" CVE_REF="cveid0" TIME_SLOT_REF1="ts10" TIME_SLOT_REF2="ts14">
+                <ANNOTATION_VALUE>SED</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <TIER DEFAULT_LOCALE="fr" LINGUISTIC_TYPE_REF="cuesId" PARENT_REF="Engagement" TIER_ID="Cues_1">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a4" CVE_REF="cveid1" TIME_SLOT_REF1="ts3" TIME_SLOT_REF2="ts7">
+                <ANNOTATION_VALUE>Head</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a5" CVE_REF="cveid3" TIME_SLOT_REF1="ts11" TIME_SLOT_REF2="ts15">
+                <ANNOTATION_VALUE>Gestures</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <TIER DEFAULT_LOCALE="fr" LINGUISTIC_TYPE_REF="NegAffect" PARENT_REF="Engagement" TIER_ID="Affect">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a6" CVE_REF="cveid6" TIME_SLOT_REF1="ts4" TIME_SLOT_REF2="ts8">
+                <ANNOTATION_VALUE>Other</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a7" CVE_REF="cveid1" TIME_SLOT_REF1="ts12" TIME_SLOT_REF2="ts16">
+                <ANNOTATION_VALUE>Boredom</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <TIER DEFAULT_LOCALE="fr" LINGUISTIC_TYPE_REF="Cause" PARENT_REF="Engagement" TIER_ID="Cause">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a8" TIME_SLOT_REF1="ts5" TIME_SLOT_REF2="ts9">
+                <ANNOTATION_VALUE>Confused why the robot is not talking</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a9" TIME_SLOT_REF1="ts13" TIME_SLOT_REF2="ts17">
+                <ANNOTATION_VALUE>Moving backwards</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <TIER DEFAULT_LOCALE="fr" LINGUISTIC_TYPE_REF="cuesId" PARENT_REF="Engagement" TIER_ID="Cues_2"/>
+    <TIER DEFAULT_LOCALE="fr" LINGUISTIC_TYPE_REF="cuesId" PARENT_REF="Engagement" TIER_ID="Cues_3"/>
+    <LINGUISTIC_TYPE GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="default-lt" TIME_ALIGNABLE="true"/>
+    <LINGUISTIC_TYPE CONTROLLED_VOCABULARY_REF="Eng" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="EngBD" TIME_ALIGNABLE="true"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Included_In" CONTROLLED_VOCABULARY_REF="Affect" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="NegAffect" TIME_ALIGNABLE="true"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Included_In" CONTROLLED_VOCABULARY_REF="CuesID" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="cuesId" TIME_ALIGNABLE="true"/>
+    <LINGUISTIC_TYPE CONTROLLED_VOCABULARY_REF="HRI" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Interact" TIME_ALIGNABLE="true"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Included_In" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Cause" TIME_ALIGNABLE="true"/>
+    <LOCALE COUNTRY_CODE="FR" LANGUAGE_CODE="fr"/>
+    <LANGUAGE LANG_DEF="http://cdb.iso.org/lg/CDB-00130975-001" LANG_ID="und" LANG_LABEL="undetermined (und)"/>
+    <CONSTRAINT DESCRIPTION="Time subdivision of parent annotation's time interval, no time gaps allowed within this interval" STEREOTYPE="Time_Subdivision"/>
+    <CONSTRAINT DESCRIPTION="Symbolic subdivision of a parent annotation. Annotations refering to the same parent are ordered" STEREOTYPE="Symbolic_Subdivision"/>
+    <CONSTRAINT DESCRIPTION="1-1 association with a parent annotation" STEREOTYPE="Symbolic_Association"/>
+    <CONSTRAINT DESCRIPTION="Time alignable annotations within the parent annotation's time interval, gaps are allowed" STEREOTYPE="Included_In"/>
+    <CONTROLLED_VOCABULARY CV_ID="Eng">
+        <DESCRIPTION LANG_REF="und">Engagement cases</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid0">
+            <CVE_VALUE DESCRIPTION="Sign of engagement decrease" LANG_REF="und">SED</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid1">
+            <CVE_VALUE DESCRIPTION="Early sign of engagement BreakDown" LANG_REF="und">EBD</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid2">
+            <CVE_VALUE DESCRIPTION="Engagement BreakDown" LANG_REF="und">BD</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid3">
+            <CVE_VALUE DESCRIPTION="Temborary engagement BreakDown" LANG_REF="und">TBD</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+    <CONTROLLED_VOCABULARY CV_ID="CuesID">
+        <DESCRIPTION LANG_REF="und">Observed Cues</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid0">
+            <CVE_VALUE DESCRIPTION="Eye Gaze" LANG_REF="und">Gaze</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid1">
+            <CVE_VALUE DESCRIPTION="Head motion" LANG_REF="und">Head</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid2">
+            <CVE_VALUE DESCRIPTION="Facial expression" LANG_REF="und">Face</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid3">
+            <CVE_VALUE DESCRIPTION="Body language (posture, hand,...)" LANG_REF="und">Gestures</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid4">
+            <CVE_VALUE DESCRIPTION="Linguistic information" LANG_REF="und">Linguistic</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid8">
+            <CVE_VALUE DESCRIPTION="Speech: acoustic" LANG_REF="und">Acoustic</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+    <CONTROLLED_VOCABULARY CV_ID="HRI">
+        <DESCRIPTION LANG_REF="und">Negative Affect</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid2">
+            <CVE_VALUE DESCRIPTION="Mono-user" LANG_REF="und">Mono</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid3">
+            <CVE_VALUE DESCRIPTION="Multi-users" LANG_REF="und">Multi</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+    <CONTROLLED_VOCABULARY CV_ID="Affect">
+        <DESCRIPTION LANG_REF="und">Negative Affect</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid0">
+            <CVE_VALUE DESCRIPTION="Frustration" LANG_REF="und">Frustration</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid1">
+            <CVE_VALUE DESCRIPTION="Boredom" LANG_REF="und">Boredom</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid2">
+            <CVE_VALUE DESCRIPTION="Nervousness" LANG_REF="und">Nervousness</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid3">
+            <CVE_VALUE DESCRIPTION="Disappointment" LANG_REF="und">Disappointment</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid4">
+            <CVE_VALUE DESCRIPTION="Anger" LANG_REF="und">Anger</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid5">
+            <CVE_VALUE DESCRIPTION="Submission" LANG_REF="und">Submission</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid6">
+            <CVE_VALUE DESCRIPTION="Other negative affect" LANG_REF="und">Other</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+</ANNOTATION_DOCUMENT>
